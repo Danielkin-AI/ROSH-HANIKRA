@@ -6834,24 +6834,15 @@ document.addEventListener("visibilitychange", () => {
 <!-- ① ה-Widget עצמו -->
 <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2025/05/20/13/20250520133347-4IWSSLT0.js"></script>
-
-<!-- ② פתיחה אוטומטית + בדיקה אם כבר נפתח באותה סשן -->
 <script>
   window.botpressWebChat.onEvent(function (event) {
-    // נדלק כש-Webchat מוכן לגמרי
     if (event.type === 'LIFECYCLE.LOADED') {
-
-      /* נפתח רק למי שעדיין לא ראה את הבוט בפעם הזו (טאב / רענון) */
       if (!sessionStorage.getItem('bp_autoOpened')) {
-
-        /* 1. פותח את האייקון והחלון */
-        window.botpressWebChat.sendEvent({ type: 'show' });           // :contentReference[oaicite:0]{index=0}
-
-        /* מסמן שפתחנו – כדי שבטעינה הבאה לא נצוץ שוב */
+        window.botpressWebChat.sendEvent({ type: 'show' });
         sessionStorage.setItem('bp_autoOpened', '1');
       }
     }
-  }, ['LIFECYCLE.LOADED']);   // מאזין רק לאירוע הזה :contentReference[oaicite:1]{index=1}
+  }, ['LIFECYCLE.LOADED']);
 </script>
 </body>
 </html>
