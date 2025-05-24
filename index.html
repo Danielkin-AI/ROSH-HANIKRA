@@ -6831,20 +6831,23 @@ document.addEventListener("visibilitychange", () => {
 
     });
 </script>
+<!-- 1 – load the widget and your bot’s config -->
 <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2025/05/20/13/20250520133347-4IWSSLT0.js"></script>
 
+<!-- 2 – open the chat window 3 s after the widget is ready,
+         but only once per browser-session -->
 <script>
-  // Wait until the widget is fully loaded
-  window.botpressWebChat.onEvent(function (event) {
-    if (event.type === 'LIFECYCLE.LOADED') {
-      // Set a 3-second timer
-      setTimeout(function () {
-        window.botpressWebChat.sendEvent({ type: 'show' });
-      }, 3000); // 3000 ms = 3 seconds
+  window.botpress.on('webchat:ready', () => {            // widget finished loading :contentReference[oaicite:0]{index=0}
+    if (!sessionStorage.getItem('bp_autoOpened')) {      // prevent repeat openings
+      setTimeout(() => {
+        window.botpress.open();                          // pops the window open :contentReference[oaicite:1]{index=1}
+        sessionStorage.setItem('bp_autoOpened', '1');    // mark as opened
+      }, 3000);                                          // 3 000 ms  = 3 s
     }
-  }, ['LIFECYCLE.LOADED']);
+  });
 </script>
+
 
 </body>
 </html>
