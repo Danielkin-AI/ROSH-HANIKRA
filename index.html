@@ -6830,19 +6830,19 @@ document.addEventListener("visibilitychange", () => {
         });
 
     });
-</script>
-<!-- ① ה-Widget עצמו -->
-<script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
+</script><script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2025/05/20/13/20250520133347-4IWSSLT0.js"></script>
+
 <script>
+  // Wait until the widget is fully loaded
   window.botpressWebChat.onEvent(function (event) {
     if (event.type === 'LIFECYCLE.LOADED') {
-      if (!sessionStorage.getItem('bp_autoOpened')) {
+      // Set a 3-second timer
+      setTimeout(function () {
         window.botpressWebChat.sendEvent({ type: 'show' });
-        sessionStorage.setItem('bp_autoOpened', '1');
-      }
+      }, 3000); // 3000 ms = 3 seconds
     }
   }, ['LIFECYCLE.LOADED']);
-</script>
+</script>	
 </body>
 </html>
